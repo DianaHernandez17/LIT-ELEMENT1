@@ -1,0 +1,44 @@
+node --version
+
+v20.5.1
+npm --version
+9.8.0
+npm init
+
+npm i lit-element
+npm install lit-element@3.3.3
+npm install -g polymer-cli
+polymer serve
+
+
+import './index-component'; // Importa tu componente Index
+import './index-2-component'; // Importa tu componente Index2
+import './login-component'; // Importa tu componente Login
+
+const appContainer = document.getElementById('app');
+
+// Obtén la página actual almacenada en el localStorage o establece la página de inicio por defecto.
+const currentPage = localStorage.getItem('currentPage') || 'login';
+
+export function renderPage(pageName) {
+  switch (pageName) {
+    case 'index':
+      appContainer.innerHTML = '<index-component></index-component>';
+      break;
+    case 'index2':
+      appContainer.innerHTML = '<index-2-component></index-2-component>';
+      break;
+    case 'login':
+      appContainer.innerHTML = '<login-component></login-component>';
+      break;
+    default:
+      // Página no encontrada o página de inicio por defecto
+      appContainer.innerHTML = '<login-component></login-component>';
+  }
+
+  // Guarda la página actual en el localStorage.
+  localStorage.setItem('currentPage', pageName);
+}
+
+// Llama a renderPage con la página almacenada en el localStorage al cargar la aplicación.
+renderPage(currentPage);
